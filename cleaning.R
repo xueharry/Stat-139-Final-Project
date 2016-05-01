@@ -80,6 +80,12 @@ for (i in 1:length(dates_unique$game_number)){
 # Rename column 
 colnames(date_normal)[27] <- "win"
 
+# Put in indicators for whether a game was at home or away
+# Initialize to 1
+date_normal$home = 1
+# Change away games to 0
+date_normal[grepl("@", date_normal$matchup) == TRUE, "home"] = 0
+
 # add avg and total shots made to date_normal dataframe
 # write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
 date_normal = merge(date_normal, dates_unique, by="game_number")
