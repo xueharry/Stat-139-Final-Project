@@ -4,12 +4,12 @@
 raw <- read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/raw.csv", header = T)
 
 # Order Games by date
-date_ordered <- raw[order(as.Date(raw$game_date, format="%m/%d/%Y")),]
+date_ordered <- raw[order(as.Date(raw$game_date, format="%m/%d/%y")),]
 
 # create new data frame with normalized dates
 date_normal = date_ordered
 # reformat data into more R-readable format
-date_normal$game_date_formatted = as.Date(date_normal$game_date, format="%m/%d/%Y")
+date_normal$game_date_formatted = as.Date(date_normal$game_date, format="%m/%d/%y")
 date_normal$game_number = 0
 
 # loop through and normalize the dates
@@ -77,9 +77,17 @@ for (i in 1:length(dates_unique$game_number)){
   dates_unique$ot_avg[i] = mean(overtime)
 }
 
-# Rename column 
-colnames(date_normal)[27] <- "win"
-
 # add avg and total shots made to date_normal dataframe
 # write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
 date_normal = merge(date_normal, dates_unique, by="game_number")
+date_normal$season_norm = 0
+count = 1
+season = substr(date_normal$season[1],1,4)
+for (i in 1:length(date_normal$season)){
+  season1 = substr(date_normal$season[i],1,4)
+  if (season1 != season) {
+    count = count + 1
+    season = season1
+  }
+  date_normal$season_norm[i] = count 
+}
