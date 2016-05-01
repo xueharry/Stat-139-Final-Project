@@ -82,7 +82,7 @@
 }
 
 
-\newenvironment{problem}[1]{\par\bigskip\noindent\textbf{Problem 
+\newenvironment{problem}[1]{\par\bigskip\noindent\textbf{Problem git 
 #1.}\enskip\ignorespaces}{}
 
 \mdfdefinestyle{MyFrame}{%
@@ -105,8 +105,18 @@
 \section{Theoretical Analysis}
 
 \begin{mdframed}[style=MyFrame ]
-\begin{center}Dynamic Programming Solution to the Number Partition Problem\end{center}
+\begin{center}New Variables Created (TEMPORARY, DELETE BEFORE SUBMISSION)\end{center}
 \end{mdframed}
-\hspace{1cm}% START OF DYNAMIC SOLUTION - FROM JOEL 
+\begin{itemize}
+\item \texttt{normal\_date}: Normalized game date. First game is 1, for game $i$, $normal\_date[i] = i$.
+\item \texttt{avg}: Average shot percentage for each game
+\item \texttt{shots\_made}: Shots made for each game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
+\item \texttt{shots\_taken}: Shots taken per game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
+\item \texttt{clutch\_threshold}: Number of minutes remaining at which we begin counting shots as clutch shots.
+\item \texttt{clutch\_perc}: Average shot percentage for clutch shots (shots attempted with below \texttt{clutch\_threshold} minutes remaining) for each game.
+\item \texttt{clutch\_shots\_made}: number of clutch shots made for each game.
+\item \texttt{clutch\_shots\_taken}: number of clutch shots taken for each game. 
+\end{itemize}
+
 
 \end{document}
