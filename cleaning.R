@@ -8,6 +8,7 @@ date_ordered <- raw[order(as.Date(raw$game_date, format="%m/%d/%Y")),]
 
 # create new data frame with normalized dates
 date_normal = date_ordered
+# reformat data into more R-readable format
 date_normal$game_date = as.Date(date_normal$game_date, format="%m/%d/%Y")
 date_normal$normal_date = 0
 
@@ -41,6 +42,7 @@ for (i in 1:length(dates_unique$normal_date)){
 
 # add avg and total shots made to date_normal dataframe
 date_normal = merge(date_normal, dates_unique, by="normal_date")
+write.csv(date_normal, file="date_normal.csv")
 
 # Calculate clutch shooting percentages 
 # specify shots taken with <= clutch_threshold minutes remaining 
@@ -59,3 +61,4 @@ clutch_shooting = subset(dates_unique, select = c(normal_date, clutch_perc, clut
 # filter out NaNs from clutch_shooting percentages
 clutch_shooting = subset(clutch_shooting, 
                          !is.nan(clutch_perc) & !is.nan(clutch_shots_made) & !is.nan(clutch_shots_taken))
+
