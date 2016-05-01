@@ -90,6 +90,18 @@ date_normal[grepl("@", date_normal$matchup) == TRUE, "home"] = 0
 date_normal$three_pointer = 1
 date_normal[grepl("2PT Field Goal", date_normal$shot_type) == TRUE, "three_pointer"] = 0
 
+# Dummy variables for combined_shot_type, 5 total, base is layup
+date_normal$jump_shot = 0
+date_normal$dunk = 0
+date_normal$tip_shot = 0
+date_normal$hook_shot = 0
+date_normal$bank_shot = 0
+date_normal[grepl("Jump Shot", date_normal$combined_shot_type) == TRUE, "jump_shot"] = 1
+date_normal[grepl("Dunk", date_normal$combined_shot_type) == TRUE, "dunk"] = 1
+date_normal[grepl("Tip Shot", date_normal$combined_shot_type) == TRUE, "tip_shot"] = 1
+date_normal[grepl("Hook Shot", date_normal$combined_shot_type) == TRUE, "hook_shot"] = 1
+date_normal[grepl("Bank Shot", date_normal$combined_shot_type) == TRUE, "bank_shot"] = 1
+
 # add avg and total shots made to date_normal dataframe
 # write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
 date_normal = merge(date_normal, dates_unique, by="game_number")

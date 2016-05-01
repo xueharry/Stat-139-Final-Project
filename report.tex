@@ -111,6 +111,12 @@
 \item \texttt{win}: Dummy variable for whether the Lakers won the game.
 \item \texttt{home}: Dummy variable for whether the game was at home or away.
 \item \texttt{three\_pointer}: Dummy variable for whether the shot was a three-pointer.
+\item \texttt{jump\_shot}: Dummy variable for whether the shot was a jump-shot. $0$ indicates a default of layup.
+\item \texttt{dunk}: Dummy variable for whether the shot was a dunk. $0$ indicates a default of layup.
+\item \texttt{tip\_shot}: Dummy variable for whether the shot was a tip-shot. $0$ indicates a default of layup.
+\item \texttt{hook\_shot}: Dummy variable for whether the shot was a hook-shot. $0$ indicates a default of layup.
+\item \texttt{bank\_shot}: Dummy variable for whether the shot was a bank-shot. $0$ indicates a default of layup.
+
 \item \texttt{game\_date\_formatted}: Reformatted date into R's native format for boolean comparisons during data processing. Pretty useless otherwise.
 \item \texttt{game\_number}: Normalized game date. First game is 1, for game $i$, $game\_number[i] = i$.
 \item \texttt{avg}: Average shot percentage for each game.
