@@ -41,7 +41,6 @@ for (i in 1:length(dates_unique$normal_date)){
   dates_unique$clutch_perc[i] = mean(subset(date_normal, 
                                             normal_date == i & minutes_remaining <= clutch_threshold)$shot_made_flag)
 }
-date_normal = merge(date_normal, dates_unique, by="normal_date")
-subset(date_normal, normal_date == 2 & minutes_remaining <= 1)
-
-
+clutch_shooting = subset(dates_unique, select = c(normal_date, clutch_perc))
+# filter out NaNs from clutch_shooting percentages
+clutch_shooting = subset(clutch_shooting, !is.nan(clutch_perc))
