@@ -40,10 +40,6 @@ for (i in 1:length(dates_unique$normal_date)){
   dates_unique$shots_taken[i] = length(shots_attempted)
 }
 
-# add avg and total shots made to date_normal dataframe
-date_normal = merge(date_normal, dates_unique, by="normal_date")
-#write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
-
 # Calculate clutch shooting percentages 
 # specify shots taken with <= clutch_threshold minutes remaining 
 clutch_threshold = 1
@@ -80,4 +76,7 @@ for (i in 1:length(dates_unique$normal_date)){
   dates_unique$ot_made[i] = sum(overtime)
   dates_unique$ot_avg[i] = mean(overtime)
 }
+
+# add avg and total shots made to date_normal dataframe
+# write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
 date_normal = merge(date_normal, dates_unique, by="normal_date")
