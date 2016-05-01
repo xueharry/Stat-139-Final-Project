@@ -77,6 +77,9 @@ for (i in 1:length(dates_unique$game_number)){
   dates_unique$ot_avg[i] = mean(overtime)
 }
 
+# Rename column 
+colnames(date_normal)[27] <- "win"
+
 # add avg and total shots made to date_normal dataframe
 # write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
 date_normal = merge(date_normal, dates_unique, by="game_number")
