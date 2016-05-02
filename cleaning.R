@@ -1,15 +1,25 @@
 # get raw file from github
 # note: to do this in the future, click on the "raw" option in github  on the page containing the csv file 
 # and copy the URL of the page you're redirected to
-raw <- read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/raw.csv", header = T)
-
+raw = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/raw.csv", header = T)
+wl = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/win_loss.csv", header = T)
+wl = subset(wl, select=c(date,win.loss))
+wl$win = 0
+wl$game_date_formatted <- as.Date(wl$date, format="%m/%d/%y")
+for (i in 1:length(wl$win.loss)){
+  win = toString(wl$win.loss[i])
+  if (win == "W") {
+    wl$win[i] = 1
+  }
+}
+wl = subset(wl, select=c(-win.loss, -date))
 # Order Games by date
-date_ordered <- raw[order(as.Date(raw$game_date, format="%m/%d/%y")),]
+date_normal <- raw[order(as.Date(raw$game_date, format="%m/%d/%y")),]
 
-# create new data frame with normalized dates
-date_normal = date_ordered
 # reformat data into more R-readable format
 date_normal$game_date_formatted = as.Date(date_normal$game_date, format="%m/%d/%y")
+date_normal = subset(date_normal, select=-win.loss)
+date_normal = merge(date_normal, wl, by="game_date_formatted")
 date_normal$game_number = 0
 
 # Rename column 
@@ -116,4 +126,4 @@ for (i in 1:length(date_normal$season)){
   }
   date_normal$season_norm[i] = count 
 }
-write.csv(clutch_shooting, "/Users/ChrisChen/Desktop/clutch_shots.csv")
+#write.csv(clutch_shooting, "/Users/ChrisChen/Desktop/clutch_shots.csv")
