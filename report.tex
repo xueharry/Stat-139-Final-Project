@@ -101,36 +101,47 @@
 \begin{document}
 
 \maketitle % Print the title
+\section{Research Questions}
+\section{Motivation}
+\section{Hypotheses}
+\section{Methods}
+	\subsection{New Variables Created}
+	\begin{mdframed}[style=MyFrame ]
+	\begin{center}New Variables Created (TEMPORARY, DELETE BEFORE SUBMISSION)\end{center}
+	\end{mdframed}
+	\begin{itemize}
+	\item \texttt{win}: Dummy variable for whether the Lakers won the game.
+	\item \texttt{home}: Dummy variable for whether the game was at home or away.
+	\item \texttt{three\_pointer}: Dummy variable for whether the shot was a three-pointer.
+	\item \texttt{jump\_shot}: Dummy variable for whether the shot was a jump-shot. $0$ indicates a default of layup.
+	\item \texttt{dunk}: Dummy variable for whether the shot was a dunk. $0$ indicates a default of layup.
+	\item \texttt{tip\_shot}: Dummy variable for whether the shot was a tip-shot. $0$ indicates a default of layup.
+	\item \texttt{hook\_shot}: Dummy variable for whether the shot was a hook-shot. $0$ indicates a default of layup.
+	\item \texttt{bank\_shot}: Dummy variable for whether the shot was a bank-shot. $0$ indicates a default of layup.
 
+	\item \texttt{game\_date\_formatted}: Reformatted date into R's native format for boolean comparisons during data processing. Pretty useless otherwise.
+	\item \texttt{game\_number}: Normalized game date. First game is 1, for game $i$, $game\_number[i] = i$.
+	\item \texttt{avg}: Average shot percentage for each game.
+	\item \texttt{shots\_made}: Shots made for each game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
+	\item \texttt{shots\_taken}: Shots taken per game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
+	\item \texttt{clutch\_threshold}: Number of minutes remaining at which we begin counting shots as clutch shots.
+	\item \texttt{clutch\_perc}: Average shot percentage for clutch shots (shots attempted with below \texttt{clutch\_threshold} minutes remaining) for each game.
+	\item \texttt{clutch\_shots\_made}: number of clutch shots made for each game.
+	\item \texttt{clutch\_shots\_taken}: number of clutch shots taken for each game. 
+	\item \texttt{ot}: dummy variable for whether or not the game went overtime.
+	\item \texttt{ot\_taken}: number of shots taken in OT.
+	\item \texttt{ot\_made}: number of shots made in OT.
+	\item \texttt{ot\_avg}: OT shooting percentage for each game.
+	\item \texttt{season\_norm}: represents the number of seasons Kobe has been in the NBA.
+	\end{itemize}
+\section{Assumptions}
+\section{Results}
+\section{Limitations}
+\section{Conclusion}
+\section{Challenges Faced}
+\section{References}
+\section{Acknowledgements}
+Special thanks to Phillip Huang for his kind assistance in helping us scrape win-loss data using the Web Scraper Chrome extension.
 \section{Theoretical Analysis}
-
-\begin{mdframed}[style=MyFrame ]
-\begin{center}New Variables Created (TEMPORARY, DELETE BEFORE SUBMISSION)\end{center}
-\end{mdframed}
-\begin{itemize}
-\item \texttt{win}: Dummy variable for whether the Lakers won the game.
-\item \texttt{home}: Dummy variable for whether the game was at home or away.
-\item \texttt{three\_pointer}: Dummy variable for whether the shot was a three-pointer.
-\item \texttt{jump\_shot}: Dummy variable for whether the shot was a jump-shot. $0$ indicates a default of layup.
-\item \texttt{dunk}: Dummy variable for whether the shot was a dunk. $0$ indicates a default of layup.
-\item \texttt{tip\_shot}: Dummy variable for whether the shot was a tip-shot. $0$ indicates a default of layup.
-\item \texttt{hook\_shot}: Dummy variable for whether the shot was a hook-shot. $0$ indicates a default of layup.
-\item \texttt{bank\_shot}: Dummy variable for whether the shot was a bank-shot. $0$ indicates a default of layup.
-
-\item \texttt{game\_date\_formatted}: Reformatted date into R's native format for boolean comparisons during data processing. Pretty useless otherwise.
-\item \texttt{game\_number}: Normalized game date. First game is 1, for game $i$, $game\_number[i] = i$.
-\item \texttt{avg}: Average shot percentage for each game.
-\item \texttt{shots\_made}: Shots made for each game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
-\item \texttt{shots\_taken}: Shots taken per game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
-\item \texttt{clutch\_threshold}: Number of minutes remaining at which we begin counting shots as clutch shots.
-\item \texttt{clutch\_perc}: Average shot percentage for clutch shots (shots attempted with below \texttt{clutch\_threshold} minutes remaining) for each game.
-\item \texttt{clutch\_shots\_made}: number of clutch shots made for each game.
-\item \texttt{clutch\_shots\_taken}: number of clutch shots taken for each game. 
-\item \texttt{ot}: dummy variable for whether or not the game went overtime.
-\item \texttt{ot\_taken}: number of shots taken in OT.
-\item \texttt{ot\_made}: number of shots made in OT.
-\item \texttt{ot\_avg}: OT shooting percentage for each game.
-\item \texttt{season\_norm}: represents the number of seasons Kobe has been in the NBA.
-\end{itemize}
 
 \end{document}
