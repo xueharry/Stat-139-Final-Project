@@ -106,8 +106,21 @@
 \section{Hypotheses}
 \section{Methods}
 	\subsection{Overview}
-	Discuss what the various files are for in the directory.
-	\subsection{Data Cleaning}
+	Our code is divided into the following files as follows:
+		\begin{itemize}
+			\item \textbf{analysis.R} contains preliminary exploratory analysis of the datasets
+			\item \textbf{cleaning.R} contains the commands we ran to clean/preprocess the data
+			\item \textbf{hypothesis\_testing.R} contains various hypothesis tests for statistical significance
+			\item \textbf{models.R} contains the models we created based on the data
+		\end{itemize}
+	Datasets:
+		\begin{itemize}
+			\item \textbf{raw.csv}: Raw data downloaded from Kaggle
+			\item \textbf{cleaned.csv}: Processed data with our modifications and dummy variables added
+			\item \textbf{clutch\_shots.csv}: Data on Kobe's shooting performance in clutch situations
+			\item \textbf{win\_loss.csv}: Win-loss data scraped from \texttt{landofbasketball.com}
+		\end{itemize}
+	\subsection{Data Preprocessing}
 	\subsection{Addition of Win-loss Data}
 	\subsection{New Variables Created}
 	The following is a list of new columns that we added to the original dataset from Kaggle:
