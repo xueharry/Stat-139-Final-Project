@@ -126,4 +126,4 @@ for (i in 1:length(date_normal$season)){
   }
   date_normal$season_norm[i] = count 
 }
-#write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
+write.csv(date_unique, "/Users/ChrisChen/Desktop/by_date.csv")
