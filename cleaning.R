@@ -107,9 +107,9 @@ date_normal[grepl("Bank Shot", date_normal$combined_shot_type) == TRUE, "bank_sh
 date_normal = merge(date_normal, dates_unique, by="game_number")
 date_normal$season_norm = 0
 count = 1
-season = substr(date_normal$season[1],1,4)
+season = date_normal$season[1]
 for (i in 1:length(date_normal$season)){
-  season1 = substr(date_normal$season[i],1,4)
+  season1 = date_normal$season[i]
   if (season1 != season) {
     count = count + 1
     season = season1
