@@ -3,8 +3,10 @@
 # and copy the URL of the page you're redirected to
 raw = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/raw.csv", header = T)
 wl = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/win_loss.csv", header = T)
+# grab only the columns we need
 wl = subset(wl, select=c(date,win.loss))
 wl$win = 0
+# format date into R-readable format
 wl$game_date_formatted <- as.Date(wl$date,  format = "%B %d, %Y")
 for (i in 1:length(wl$win.loss)){
   win = toString(wl$win.loss[i])
@@ -21,9 +23,6 @@ date_normal$game_date_formatted = as.Date(date_normal$game_date, format="%m/%d/%
 date_normal = subset(date_normal, select=-win.loss)
 date_normal = merge(date_normal, wl, by="game_date_formatted")
 date_normal$game_number = 0
-
-# Rename column 
-colnames(date_normal)[which(names(date_normal) == "win.loss")] <- "win"
 
 # Put in indicators for whether a game was at home or away
 # Initialize to 1
@@ -113,8 +112,9 @@ date_normal[grepl("Hook Shot", date_normal$combined_shot_type) == TRUE, "hook_sh
 date_normal[grepl("Bank Shot", date_normal$combined_shot_type) == TRUE, "bank_shot"] = 1
 
 # add avg and total shots made to date_normal dataframe
-
-date_normal = merge(date_normal, dates_unique, by="game_number")
+# avoid remerging win
+dates_unique1 = subset(dates_unique, select=-win)
+date_normal = merge(date_normal, dates_unique1, by="game_number")
 date_normal$season_norm = 0
 count = 1
 season = date_normal$season[1]
@@ -126,4 +126,4 @@ for (i in 1:length(date_normal$season)){
   }
   date_normal$season_norm[i] = count 
 }
-#write.csv(clutch_shooting, "/Users/ChrisChen/Desktop/clutch_shots.csv")
+write.csv(date_normal, "/Users/ChrisChen/Desktop/clutch_shots.csv")
