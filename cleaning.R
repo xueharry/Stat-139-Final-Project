@@ -12,6 +12,15 @@ date_normal = date_ordered
 date_normal$game_date_formatted = as.Date(date_normal$game_date, format="%m/%d/%y")
 date_normal$game_number = 0
 
+# Rename column 
+colnames(date_normal)[which(names(date_normal) == "win.loss")] <- "win"
+
+# Put in indicators for whether a game was at home or away
+# Initialize to 1
+date_normal$home = 1
+# Change away games to 0
+date_normal[grepl("@", date_normal$matchup) == TRUE, "home"] = 0
+
 # loop through and normalize the dates
 date = date_normal$game_date_formatted[1]
 counter = 1
@@ -28,8 +37,8 @@ for (i in 1:length(date_normal$game_date_formatted)){
 is.unsorted(date_normal$game_number) # Should return false
 
 # calculate percentage of shots made each game and merge into date_normal data frame
-dates = subset(date_normal, select = c(game_number,shot_made_flag))
-dates_unique = unique(subset(dates, select = c(game_number)))
+dates = subset(date_normal, select = c(game_number,shot_made_flag,win))
+dates_unique = unique(subset(dates, select = c(game_number,win)))
 dates_unique$avg = 0
 dates_unique$shots_made = 0
 dates_unique$shots_taken = 0
@@ -53,7 +62,7 @@ for (i in 1:length(dates_unique$game_number)){
   dates_unique$clutch_shots_made[i] = sum(clutches_attempted)
   dates_unique$clutch_shots_taken[i] = length(clutches_attempted)
 }
-clutch_shooting = subset(dates_unique, select = c(game_number, clutch_perc, clutch_shots_made, clutch_shots_taken))
+clutch_shooting = subset(dates_unique, select = c(game_number, win, clutch_perc, clutch_shots_made, clutch_shots_taken))
 # filter out NaNs from clutch_shooting percentages
 clutch_shooting = subset(clutch_shooting, 
                          !is.nan(clutch_perc) & !is.nan(clutch_shots_made) & !is.nan(clutch_shots_taken))
@@ -77,15 +86,6 @@ for (i in 1:length(dates_unique$game_number)){
   dates_unique$ot_avg[i] = mean(overtime)
 }
 
-# Rename column 
-colnames(date_normal)[27] <- "win"
-
-# Put in indicators for whether a game was at home or away
-# Initialize to 1
-date_normal$home = 1
-# Change away games to 0
-date_normal[grepl("@", date_normal$matchup) == TRUE, "home"] = 0
-
 # Dummy variable for 3-pointers
 date_normal$three_pointer = 1
 date_normal[grepl("2PT Field Goal", date_normal$shot_type) == TRUE, "three_pointer"] = 0
@@ -103,7 +103,7 @@ date_normal[grepl("Hook Shot", date_normal$combined_shot_type) == TRUE, "hook_sh
 date_normal[grepl("Bank Shot", date_normal$combined_shot_type) == TRUE, "bank_shot"] = 1
 
 # add avg and total shots made to date_normal dataframe
-# write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
+
 date_normal = merge(date_normal, dates_unique, by="game_number")
 date_normal$season_norm = 0
 count = 1
@@ -116,3 +116,4 @@ for (i in 1:length(date_normal$season)){
   }
   date_normal$season_norm[i] = count 
 }
+write.csv(clutch_shooting, "/Users/ChrisChen/Desktop/clutch_shots.csv")
