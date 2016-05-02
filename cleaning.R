@@ -5,7 +5,7 @@ raw = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Projec
 wl = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/win_loss.csv", header = T)
 wl = subset(wl, select=c(date,win.loss))
 wl$win = 0
-wl$game_date_formatted <- as.Date(wl$date, format="%m/%d/%y")
+wl$game_date_formatted <- as.Date(wl$date,  format = "%B %d, %Y")
 for (i in 1:length(wl$win.loss)){
   win = toString(wl$win.loss[i])
   if (win == "W") {
