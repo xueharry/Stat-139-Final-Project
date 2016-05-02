@@ -102,9 +102,19 @@
 
 \maketitle % Print the title
 \section{Research Questions}
+\begin{itemize}
+	\item What factors influenced whether Kobe Bryant made a given shot? Is Kobe especially talented at a particular type of shot?
+	\item Kobe Bryant is a renowned ``clutch'' player. Is there a statistically significant difference between Kobe Bryant's accuracy when there is less than one minute remaining in a given game compared to his overall accuracy? What about the fourth quarter and overtime?
+	\item Is there a statistically significant relationship between Kobe's game performance and the the ultimate result of a given game (on average)?
+	\item Did his major injuries have a significant impact on his performance in the short/long term?
+	\item Did Kobe's performance differ depending on whether he was playing at home or away?
+\end{itemize}
 \section{Motivation}
+Given the recent retirement of NBA superstar Kobe Bryant, known to be a ``clutch'' player, we believe researching the factors influencing (and influenced by) Kobe's shooting accuracy will prove to be an interesting application of the statistical techniques learned in this class. 
 \section{Hypotheses}
 \section{Methods}
+	\subsection{Dataset Used}
+	The dataset used as the basis for our analysis was downloaded from the Kobe Bryant Shot Selection Kaggle competition (\texttt{https://www.kaggle.com/c/kobe-bryant-shot-selection}).
 	\subsection{Overview}
 	Our code is divided into the following files as follows:
 		\begin{itemize}
@@ -121,7 +131,9 @@
 			\item \textbf{win\_loss.csv}: Win-loss data scraped from \texttt{landofbasketball.com}
 		\end{itemize}
 	\subsection{Data Preprocessing}
+	Fortunately since we were dealing with a Kaggle dataset, for the most part it was well-formatted to begin with. The main changes we made in preprocessing were to remove the rows where there was no record of whether a shot was made (these were the rows to be predicted in the Kaggle competition, but were not very useful for our purposes), add dummy variables and add in win-loss data.
 	\subsection{Addition of Win-loss Data}
+	Unfortunately the Kaggle dataset did not include data on whether the game during which a particular shot took place was won by the Lakers or not. Therefore we decided to gather that data ourselves. We scraped win-loss data for all Lakers games in the time period covered by the Kaggle dataset using the Chrome extension Web Scraper and merged that data with the original Kaggle dataset for use in our analysis.
 	\subsection{New Variables Created}
 	The following is a list of new columns that we added to the original dataset from Kaggle:
 	\begin{itemize}
@@ -150,10 +162,13 @@
 	\item \texttt{season\_norm}: represents the number of seasons Kobe has been in the NBA.
 	\end{itemize}
 \section{Assumptions}
+\subsection{Incompleteness of Data}
+Since our original data is from a Kaggle competition, not all of Kobe's shots are included ($5000$ are hidden). However we assume that despite the incompleteness of this dataset, the data should still be an accurate representation of overall trends in Kobe Bryant's shooting performance. We believe that this is a reasonable assumption to make since it appears that Kaggle randomly assigns data into its training and testing datasets (\texttt{https://www.kaggle.com/c/DontGetKicked/forums/t/975/splitting-of-data-into-training-and-test}), so the data we had to work with should be a (very large) random sample of Kobe Bryant's shots.
 \section{Results}
 \section{Limitations}
-\section{Conclusion}
+\subsection{Lack of Free-Throw Data}
 \section{Challenges Faced}
+\section{Conclusion}
 \section{References}
 \section{Acknowledgements}
 Special thanks to Phillip Huang for his kind assistance in helping us scrape win-loss data using the Web Scraper Chrome extension.
