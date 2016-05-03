@@ -10,8 +10,21 @@ ad.test(clutch_shots$clutch_perc)
 ## not Normally distributed, bootstrap to account for it
 clutch_shots_win = subset(clutch_shots, win > 0)
 clutch_shots_loss = subset(clutch_shots, win < 1)
-win_clutch_perc = clutch_shots_win$clutch_perc
-loss_clutch_perc = clutch_shots_loss$clutch_perc
+boot.mean = function(x,B) {
+  n = length(x)
+  boot.samples = matrix( sample(x,size=n*B,replace=TRUE), B, n)
+  boot.statistics = apply(boot.samples,1,mean)
+  se = sd(boot.statistics)
+  interval = mean(x) + c(-1,1)*1.96*se
+  print(interval)
+  return(list(boot.statistics = boot.statistics, interval=interval, se=se))
+}
+win_clutch_perc = c(rep(1,sum(clutch_shots_win$clutch_shots_made)), rep(0,sum(clutch_shots_win$clutch_shots_taken-clutch_shots_win$clutch_shots_made)))
+win_clutch_perc_ci = boot.mean(x = win_clutch_perc, B = 1000)
+loss_clutch_perc = c(rep(1,sum(clutch_shots_loss$clutch_shots_made)), rep(0,sum(clutch_shots_loss$clutch_shots_taken-clutch_shots_loss$clutch_shots_made)))
+loss_clutch_perc_ci = boot.mean(x = loss_clutch_perc, B = 1000)
+## since the two confidence intervals do not overlap, there is significant evidence of a difference in Kobe's clutch field goal percentage in games won versus games lost. 
+
 boot_mean_difference = function(x,y){
   A = sample(x, length(x), replace = T)
   B = sample(y, length(y), replace = T)
