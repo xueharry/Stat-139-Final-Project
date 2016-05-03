@@ -177,7 +177,7 @@ Before creating any models or performing significance tests, we decided to perfo
 \begin{center}
 	\includegraphics[width=14cm]{img/period}
 \end{center}
-Note that periods $5$ through $7$ refer to overtime periods. Kobe appears to be relatively consistent in his shooting percentage over the periods. There does not appear to be a marked improvement in his shooting in the latter periods. In fact, his lowest percentages are in the fourth, fifth and seventh periods, though his highest percentage is in the sixth period.  
+Note that periods $5$ through $7$ refer to overtime periods. Kobe appears to be relatively consistent in his shooting percentage over the periods. Contrary to our hypotheses, there does not appear to be a marked improvement in his shooting in the latter periods. In fact, his lowest percentages are in the fourth, fifth and seventh periods, though his highest percentage is in the sixth period.  
 \begin{center}
 	\includegraphics[width=14cm]{img/seconds}
 \end{center}
@@ -194,6 +194,7 @@ Unsurprisingly, Kobe's most accurate shot is a dunk given the close range. His s
 After making these preliminary observations, we moved on to significance testing and model building.
 
 \subsection{Significance Testing}
+\hspace*{1cm}With the dummy variables we inserted into our final datasets there seemed to be a good initial framework for two-sample t testing to compare Kobe's average field goal percentage i.e. shots made/shots taken in various situations. However, the major assumption of Normality was violated by most of these subsamples of our datasets, so conventional t testing was not an appropriate approach. To address the Normality concerns we instead chose to take a bootstrapping approach and construct and compare confidence intervals for Kobe's true field goal percentage under different conditions. In essence we created a function that takes in a numerical vector, with 1's representing shots made and 0's representing shots missed, and calculates a confidence interval for the true field goal percentage based on that vector after sampling with replacement 1000 times to create the bootstrapped data. Once we created two 95 percent confidence intervals based on our data on Kobe's performance under the different situations, we could check for overlap to see whether there was a significant difference in his performance. For example, we observed that in terms of clutch field goal percentage, Kobe shot significantly better in wins compared to losses, which aligned with our hypotheses. However, when comparing clutch time versus overall effectiveness, we found that Kobe actually shot significantly worse in the clutch compared to his regular performance, which we first saw hints of in our exploratory analysis. Lastly, one of Kobe's most striking examples of enduring injury was in the 2007-2008 season, when he played through a severe injury to his pinky finger on his shooting hand. When comparing his performance before and after the injury occurred in that season, we found no significant change in his overall effectiveness. Combined with our exploratory analysis, besides the expected age decline his consistency combined with these results our analysis seems to support his renowned physical toughness.
 \subsection{Model Building}
 
 \section{Limitations}
