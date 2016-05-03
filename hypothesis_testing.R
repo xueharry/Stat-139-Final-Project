@@ -5,17 +5,9 @@ bydate_data = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Fina
 ## to analyze whether clutch shot percentage is higher in wins versus losses
 t.test(clutch_shots$clutch_perc~clutch_shots$win)
 ## shot percentage is higher in wins
-## to analyze whether Kobe takes more clutch shots in wins versus losses
-t.test(clutch_shots$clutch_shots_taken~clutch_shots$win)
-## number of shots taken is higher in losses versus wins
-## does Kobe make more clutch shots in wins if he takes less shots?
-t.test(clutch_shots$clutch_shots_made~clutch_shots$win)
-## no significant difference in clutch shots made between wins and losses
 ## check for normality of the response variables
 ad.test(clutch_shots$clutch_perc)
-ad.test(clutch_shots$clutch_shots_made)
-ad.test(clutch_shots$clutch_shots_taken)
-## none of these variables are normal, bootstrap to account for it
+## not Normally distributed, bootstrap to account for it
 clutch_shots_win = subset(clutch_shots, win > 0)
 clutch_shots_loss = subset(clutch_shots, win < 1)
 win_clutch_perc = clutch_shots_win$clutch_perc
@@ -33,9 +25,10 @@ clutch_mean_difference_ci = c(quantile(clutch_win_mean_difference_data, c(0.025,
 ## since confidence interval does not include 0, at a 0.05 significance level there is evidence of a difference in average shot percentage depending on whether the Lakers won or not.
 ## so Kobe appears to have shot significantly better in the clutch during wins as opposed to losses.
 ad.test(bydate_data$avg)
+## in overall dataset, game-to-game shooting percentages are not Normally distributed, so bootstrap needs to be used.
 clutch_regular_mean_difference_data = replicate(1000, boot_mean_difference(x = clutch_shots$clutch_perc, y = bydate_data$avg))
 ad.test(clutch_regular_mean_difference_data)
-## data looks to be Normally distributed
+## data looks to be Normally distributed now.
 clutch_regular_mean_difference_ci = c(quantile(clutch_regular_mean_difference_data, c(0.025,0.975))[1], quantile(clutch_regular_mean_difference_data, c(0.025,0.975)[2]))
 ## since confidence interval does not include 0, at a 0.05 significance level there is significant evidence of a difference in average shot percentage depending on whether Kobe is playing in a clutch situation.
 ## since the confidence interval is negative, the data suggests that Kobe actually performs worse in clutch situations compared to his overall game performance.
