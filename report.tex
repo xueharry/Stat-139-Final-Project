@@ -117,7 +117,7 @@
 \section{Hypotheses}
 \section{Methods}
 	\subsection{Dataset Used}
-	\hspace*{1cm}The dataset used as the basis for our analysis was downloaded from the Kobe Bryant Shot Selection Kaggle competition (\texttt{https://www.kaggle.com/c/kobe-bryant-shot-selection}).
+	\hspace*{1cm}The dataset used as the basis for our analysis was downloaded from the Kobe Bryant Shot Selection Kaggle competition \cite{kagglecompetition}.
 	\subsection{Overview}
 	Our code is divided into the following files as follows:
 		\begin{itemize}
@@ -140,7 +140,7 @@
 
 	\hspace*{1cm}Additionally, we created a separate data frame specifically to track Kobe's ``clutch'' shots, that is, the shots Kobe attempted when there were less than 2 minutes remaining in the game, in order to examine whether Kobe's shooting accuracy improved or suffered towards the end of the game and whether Kobe lived up to his ``clutch'' reputation. We thought 2 minutes was a reasonable threshold for ``clutch'' shooting because the 2 minute mark is close enough to the end of the game to warrant riskier plays but far away enough for Kobe to execute those plays and actually take some shots. 
 	\subsection{Addition of Win-loss Data}
-	\hspace*{1cm}Unfortunately the Kaggle dataset did not include data on whether the game during which a particular shot took place was won by the Lakers or not. Therefore we decided to gather that data ourselves. We scraped win-loss data for all Lakers games in the time period covered by the Kaggle dataset using the ``Web Scraper'' Chrome extension and merged that data with the original Kaggle dataset for use in our analysis.
+	\hspace*{1cm}Unfortunately the Kaggle dataset did not include data on whether the game during which a particular shot took place was won by the Lakers or not. Therefore we decided to gather that data ourselves. We scraped win-loss data for all Lakers games in the time period covered by the Kaggle dataset from landofbasketball.com \cite{landofbasketball} using the ``Web Scraper'' Chrome extension and merged that data with the original Kaggle dataset for use in our analysis.
 	\subsection{New Variables Created}
 	The following is a list of new columns that we added to the original dataset from Kaggle:
 	\begin{itemize}
@@ -170,7 +170,7 @@
 	\end{itemize}
 \section{Assumptions}
 \subsection{Incompleteness of Data}
-\hspace*{1cm}Since our original data is from a Kaggle competition, not all of Kobe's shots are included ($5000$ are hidden). However we assume that despite the incompleteness of this dataset, the data should still be an accurate representation of overall trends in Kobe Bryant's shooting performance. We believe that this is a reasonable assumption to make since it appears that Kaggle randomly assigns data into its training and testing datasets (\texttt{https://www.kaggle.com/c/DontGetKicked/forums/t/975/splitting-of-data-into-training-and-test}), so the data we had to work with should be a (very large) random sample of Kobe Bryant's shots.
+\hspace*{1cm}Since our original data is from a Kaggle competition, not all of Kobe's shots are included ($5000$ are hidden). However we assume that despite the incompleteness of this dataset, the data should still be an accurate representation of overall trends in Kobe Bryant's shooting performance. We believe that this is a reasonable assumption to make since it appears that Kaggle randomly assigns data into its training and testing datasets \cite{forumpost}, so the data we had to work with should be a (very large) random sample of Kobe Bryant's shots.
 \section{Results}
 \subsection{Exploratory Analysis}
 Before creating any models or performing significance tests, we decided to perform some preliminary visualization to better understand Kobe's shooting percentage over period, over seconds remaining in the period, over season and by shot type. The graphs from initial exploration are as follows, along with our initial reactions prior to performing more in-depth analysis:
@@ -206,8 +206,21 @@ After making these preliminary observations, we moved on to significance testing
 
 \hspace*{1cm}In terms of performing analysis, one of our main takeaways was that given a large amount of data and features, it is a challenge to determine what sort of analysis to perform. There are many more potential statistical relationships we could have explored given the richness of the data set. That said, we believe that we have performed a reasonable amount of analysis for the goal of addressing our research questions.
 \section{Conclusion}
-\section{References}
-\section{Acknowledgements}
+\begin{thebibliography}{9}
+	\bibitem{kagglecompetition}
+	Kaggle. 
+	\textit{Kobe Bryant Shot Selection}, \texttt{https://www.kaggle.com/c/kobe-bryant-shot-selection}
+
+	\bibitem{forumpost}
+	Kaggle. 
+	\textit{Splitting of data into training and test},\\ \texttt{https://www.kaggle.com/c/DontGetKicked/forums/t/975/splitting-of-data-into-training-and-test}
+
+	\bibitem{landofbasketball}
+	Land of Basketball.com.
+	\textit{Los Angeles Lakers}, \\\texttt{http://www.landofbasketball.com/teams/records\_los\_angeles\_lakers.htm}
+
+\end{thebibliography}
+\section*{Acknowledgements}
 \hspace*{1cm}Special thanks to Phillip Huang for his kind assistance in helping us scrape win-loss data using the Web Scraper Chrome extension.
 
 \end{document}
