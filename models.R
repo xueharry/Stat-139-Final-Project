@@ -1,6 +1,6 @@
-mydata = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/cleaned.csv", header = T)
+cleaned = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/cleaned.csv", header = T)
 clutch_shots = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/clutch_shots.csv", header = T)
-
+by_date = read.csv("https://raw.githubusercontent.com/xueharry/Stat-139-Final-Project/master/by_date.csv", header = T)
 # subset data
 myvars=c("game_number","loc_x","loc_y","minutes_remaining","period","playoffs","seconds_remaining","shot_distance","shot_made_flag","win","home","three_pointer","jump_shot","dunk","tip_shot","hook_shot","bank_shot")
 data=cleaned[myvars]
