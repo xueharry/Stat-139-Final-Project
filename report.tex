@@ -80,7 +80,7 @@
 \normalfont \normalsize 
 \textsc{Harvard University, Stat 139, Spring 2016} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Final Project: Predicting Kobe Bryant's Shots \\ % The assignment title
+\huge Final Project: Analysis of Kobe Bryant's Shooting Performance \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -170,28 +170,38 @@
 \subsection{Incompleteness of Data}
 \hspace*{1cm}Since our original data is from a Kaggle competition, not all of Kobe's shots are included ($5000$ are hidden). However we assume that despite the incompleteness of this dataset, the data should still be an accurate representation of overall trends in Kobe Bryant's shooting performance. We believe that this is a reasonable assumption to make since it appears that Kaggle randomly assigns data into its training and testing datasets (\texttt{https://www.kaggle.com/c/DontGetKicked/forums/t/975/splitting-of-data-into-training-and-test}), so the data we had to work with should be a (very large) random sample of Kobe Bryant's shots.
 \section{Results}
-\subsection*{Exploratory Analysis}
+\subsection{Exploratory Analysis}
+Before creating any models or performing significance tests, we decided to perform some preliminary visualization to better understand Kobe's shooting percentage over period, over seconds remaining in the period, over season and by shot type. The graphs from initial exploration are as follows, along with our initial reactions prior to performing more in-depth analysis:
 \begin{center}
 	\includegraphics[width=14cm]{img/period}
 \end{center}
+Note that periods $5$ through $7$ refer to overtime periods. Kobe appears to be relatively consistent in his shooting percentage over the periods. There does not appear to be a marked improvement in his shooting in the latter periods. In fact, his lowest percentages are in the fourth, fifth and seventh periods, though his highest percentage is in the sixth period.  
 \begin{center}
 	\includegraphics[width=14cm]{img/seconds}
 \end{center}
+Again Kobe appears to be relatively consistent in his shooting percentage in the last minute of play. However, his accuracy appears to dip dramatically when there are zero seconds left (shots made right at the buzzer).
 \begin{center}
 	\includegraphics[width=19cm]{img/season}
 \end{center}
+Consistency again is the main trend when it comes to Kobe's shooting performance over season for most of his career. As expected, there is a noticeable decline in his final few seasons.
 \begin{center}
 	\includegraphics[width=14cm]{img/type}
 \end{center}
+Unsurprisingly, Kobe's most accurate shot is a dunk given the close range. His second most accurate shot is a bank shot and his least accurate shot is the jump shot, which makes sense given that this category would include three pointers.\\
+
+After making these preliminary observations, we moved on to significance testing and model building.
+
+\subsection{Significance Testing}
+\subsection{Model Building}
+
 \section{Limitations}
 \subsection{Lack of Free-Throw Data}
 \hspace*{1cm}One disadvantage of the dataset we utilized was that it only considered field goals during running game time i.e. 2-point and 3-point field goals. While free throws are often considered indicative of a player's effectiveness in clutch situations, in many ways regular field goals are more impressive because, unlike with free throws, players are challenged by their opponents when taking jump shots and layups. Thus, despite this specific absence in the dataset we feel that our analysis still reveals much about Kobe's overall effectiveness in normal and higher stress clutch conditions.
-\section{Challenges Faced}
+\section{Challenges Faced \& Lessons Learned}
 \hspace*{1cm}One challenge we faced while performing data preprocessing was that the \texttt{date} variable obtained from scraping the win-loss data originally used a long-form format (e.g, ``May 2, 2016''). When we used Excel to change the date formatting and proceeded with the data cleaning in \texttt{cleaning.R}, we noticed that some of the dates were years in the future (which is clearly beyond the realm of possibility for basketball shots already taken by Kobe Bryant). To resolve this error, we passed in the raw data obtained by the scraping process into R, and discovered that R had a parsing option for long-form dates. Using the R-formatted dates, we were able to accurately merge the win-loss data with our shooting data. 
 \section{Conclusion}
 \section{References}
 \section{Acknowledgements}
 \hspace*{1cm}Special thanks to Phillip Huang for his kind assistance in helping us scrape win-loss data using the Web Scraper Chrome extension.
-\section{Theoretical Analysis}
 
 \end{document}
