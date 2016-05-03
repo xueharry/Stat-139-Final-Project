@@ -39,3 +39,12 @@ ad.test(clutch_regular_mean_difference_data)
 clutch_regular_mean_difference_ci = c(quantile(clutch_regular_mean_difference_data, c(0.025,0.975))[1], quantile(clutch_regular_mean_difference_data, c(0.025,0.975)[2]))
 ## since confidence interval does not include 0, at a 0.05 significance level there is significant evidence of a difference in average shot percentage depending on whether Kobe is playing in a clutch situation.
 ## since the confidence interval is negative, the data suggests that Kobe actually performs worse in clutch situations compared to his overall game performance.
+## Finger injury occurred on February 5, 2008 season (season 11, overall game number 473, season ends at game 507)
+## Compare Kobe's performance before the injury and after injury during the season. Hypothesis: Kobe is notoriously tough so he is not as affected by injuries.
+bydate_data_finger = subset(bydate_data, game_number > 472 & game_number < 508)
+bydate_data_season11 = subset(bydate_data, game_number > 452 & game_number < 508)
+finger_mean_difference_data = replicate(1000, boot_mean_difference(bydate_data_finger$avg, bydate_data_season11$avg))
+ad.test(finger_mean_difference_data)
+finger_mean_difference_ci = c(quantile(finger_mean_difference_data, c(0.025,0.975))[1], quantile(finger_mean_difference_data, c(0.025,0.975))[2])
+## confidence interval contains 0, so at a 0.05 significance level there is not enough evidence to reject the null hypothesis that Kobe had the same field goal percentage before and after his finger injury
+## note that although Kobe Bryant played all 82 games, dataset only includes 55 total games from the 2007-2008 season.
