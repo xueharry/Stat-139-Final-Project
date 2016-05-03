@@ -13,5 +13,16 @@ period.7.avg = sum(subset(cleaned, period == 7 & shot_made_flag == 1)$shot_made_
 
 barplot(c(period.1.avg, period.2.avg, period.3.avg, period.4.avg, period.5.avg, period.6.avg, period.7.avg), main="Kobe's Shooting Percentage Over Period", col="darkorchid", names.arg=c(1,2,3,4,5,6,7), xlab="Period", ylab="Average Shooting Percentage")
 
-# Breakdown of Kobe's shooting by shot type
+# Breakdown of Kobe's shooting by season
+season = aggregate(cleaned$shot_made_flag, list(cleaned$season), mean)
+barplot(season$x, names.arg=season$Group.1, main="Kobe's Shooting Percentage Over Season", col="darkorchid", xlab="Season", ylab="Average Shooting Percentage")
+
+# Kobe's shooting by action_shot_type
+type = aggregate(cleaned$shot_made_flag, list(cleaned$combined_shot_type), mean)
+barplot(type$x, names.arg=type$Group.1, main="Kobe's Shooting Percentage by Shot Type", col="darkorchid", xlab="Shot Type", ylab="Average Shooting Percentage")
+
+# Kobe's shooting by seconds remaining
+seconds.remaining = aggregate(cleaned$shot_made_flag, list(cleaned$seconds_remaining), mean)
+barplot(seconds.remaining$x, names.arg=seconds.remaining$Group.1, main="Kobe's Shooting Percentage Over Seconds Remaining", col="darkorchid", xlab="Seconds Remaining", ylab="Average Shooting Percentage")
+
 
