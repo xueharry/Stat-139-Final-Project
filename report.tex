@@ -217,6 +217,9 @@ After making these preliminary observations, we moved on to significance testing
 \begin{center}
 	\includegraphics[width=14cm]{img/logit1}
 \end{center}
+
+\hspace*{1cm}Note that we did not include the seconds remaining variable in our model because that variable is not a measure of how many seconds were remaining absolutely in the game as one would think, but rather the number of seconds remaining in a particular minute (which could have been any minute of a quarter). This was poorly documented by Kaggle and was a source of confusion for us at first, but once we discovered the meaning of the variable, we corrected our model accordingly.
+
 \hspace*{1cm} For the sake of comparison, we also utilized the \texttt{stepwise} command from the \texttt{Rcmdr}
 package. Using the AIC criterion with a backwards stepwise regression, we obtain: 
 \begin{center}
