@@ -17,9 +17,8 @@
 \contentsline {subsubsection}{\numberline {6.3.1}Logistic Regression on Shot Made Data}{7}{subsubsection.6.3.1}
 \contentsline {subsubsection}{\numberline {6.3.2}Logistic Regression on Win/Loss Data}{11}{subsubsection.6.3.2}
 \contentsline {subsubsection}{\numberline {6.3.3}Stationarity}{11}{subsubsection.6.3.3}
-\contentsline {subsection}{\numberline {6.4}Cross Validation}{12}{subsection.6.4}
 \contentsline {section}{\numberline {7}Limitations}{12}{section.7}
 \contentsline {subsection}{\numberline {7.1}Lack of Free-Throw Data}{12}{subsection.7.1}
 \contentsline {subsection}{\numberline {7.2}Definition of Clutch}{12}{subsection.7.2}
 \contentsline {section}{\numberline {8}Challenges Faced \& Lessons Learned}{12}{section.8}
-\contentsline {section}{\numberline {9}Conclusion}{13}{section.9}
+\contentsline {section}{\numberline {9}Conclusion}{12}{section.9}
