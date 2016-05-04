@@ -162,7 +162,7 @@
 	\item \texttt{shots\_made}: Shots made for each game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
 	\item \texttt{shots\_taken}: Shots taken per game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
 	\item \texttt{clutch\_threshold}: Number of minutes remaining at which we begin counting shots as clutch shots.
-	\item \texttt{clutch\_perc}: Average shooting percentage for clutch shots (shots attempted with below \texttt{clutch\_threshold} minutes remaining) for each game.
+	\item \texttt{clutch\_perc}: Average shooting percentage for clutch shots (shots attempted with less than 2 minutes remaining during the 4th period or during overtime) for each game.
 	\item \texttt{clutch\_shots\_made}: number of clutch shots made for each game.
 	\item \texttt{clutch\_shots\_taken}: number of clutch shots taken for each game. 
 	\item \texttt{non\_clutch\_perc}: Average shooting percentange for non-clutch shots (shots attempted with above \texttt{clutch\_threshold} minutes remaining) for each game. 
@@ -295,7 +295,7 @@ Given the amount of data we had to work with, we had to set a quantitative thres
 \begin{thebibliography}{9}
 	\bibitem{bootstraptheory}
 	Bret Larget.
-	\textit{Chapter 3: R Bootstrap Examples}, \\\texttt{http://www.stat.wisc.edu/~larget/stat302/chap3.pdf}
+	\textit{Chapter 3: R Bootstrap Examples}, \\\texttt{http://www.stat.wisc.edu/$\sim$larget/stat302/chap3.pdf}
 	
 	\bibitem{kagglecompetition}
 	Kaggle. 
