@@ -23,9 +23,3 @@ barplot(season$x, names.arg=season$Group.1, main="Kobe's Shooting Percentage Ove
 # Kobe's shooting by action_shot_type
 type = aggregate(cleaned$shot_made_flag, list(cleaned$combined_shot_type), mean)
 barplot(type$x, names.arg=type$Group.1, main="Kobe's Shooting Percentage by Shot Type", col="darkorchid", xlab="Shot Type", ylab="Average Shooting Percentage")
-
-# Kobe's shooting by seconds remaining
-seconds.remaining = aggregate(cleaned$shot_made_flag, list(cleaned$seconds_remaining), mean)
-barplot(seconds.remaining$x, names.arg=seconds.remaining$Group.1, main="Kobe's Shooting Percentage Over Seconds Remaining", col="darkorchid", xlab="Seconds Remaining", ylab="Average Shooting Percentage")
-
-
