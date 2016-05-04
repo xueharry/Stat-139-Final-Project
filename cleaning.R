@@ -1,3 +1,6 @@
+# cleaning.R
+# Data preprocessing and cleaning
+
 # get raw file from github
 # note: to do this in the future, click on the "raw" option in github  on the page containing the csv file 
 # and copy the URL of the page you're redirected to
