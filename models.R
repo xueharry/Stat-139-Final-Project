@@ -44,6 +44,5 @@ adf.test(by_date$win, alternative = "stationary")
 # logit regression for win-loss
 # Add column for percentage in non-clutch situations
 # to create two independent categories for clutch and non-clutch
-by_date$non_clutch_perc = (by_date$shots_made - by_date$clutch_shots_made) / (by_date$shots_taken - by_date$clutch_shots_taken)
 fit=glm(win~clutch_perc +non_clutch_perc,data=by_date, na.action=na.omit)
-
+summary(fit)
