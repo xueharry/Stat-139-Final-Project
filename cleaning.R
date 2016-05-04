@@ -69,11 +69,12 @@ dates_unique$clutch_shots_made = 0
 dates_unique$clutch_shots_taken = 0
 for (i in 1:length(dates_unique$game_number)){
   clutches_attempted = subset(date_normal, 
-                        game_number == i & minutes_remaining <= clutch_threshold)$shot_made_flag
+                        game_number == i & ((minutes_remaining <= clutch_threshold & period == 4) | period > 4))$shot_made_flag
   dates_unique$clutch_perc[i] = mean(clutches_attempted)
   dates_unique$clutch_shots_made[i] = sum(clutches_attempted)
   dates_unique$clutch_shots_taken[i] = length(clutches_attempted)
 }
+dates_unique$non_clutch_perc = (dates_unique$shots_made - dates_unique$clutch_shots_made) / (dates_unique$shots_taken - dates_unique$clutch_shots_taken)
 clutch_shooting = subset(dates_unique, select = c(game_number, win, clutch_perc, clutch_shots_made, clutch_shots_taken))
 # filter out NaNs from clutch_shooting percentages
 clutch_shooting = subset(clutch_shooting, 
@@ -116,7 +117,7 @@ date_normal[grepl("Bank Shot", date_normal$combined_shot_type) == TRUE, "bank_sh
 
 # add avg and total shots made to date_normal dataframe
 # avoid remerging win
-dates_unique1 = subset(dates_unique, select=-win)
+dates_unique1 = subset(dates_unique, select=c(-win))
 date_normal = merge(date_normal, dates_unique1, by="game_number")
 date_normal$season_norm = 0
 count = 1
@@ -129,4 +130,6 @@ for (i in 1:length(date_normal$season)){
   }
   date_normal$season_norm[i] = count 
 }
-#write.csv(date_unique, "/Users/ChrisChen/Desktop/by_date.csv")
+write.csv(dates_unique, "/Users/ChrisChen/Desktop/by_date.csv")
+write.csv(clutch_shooting, "/Users/ChrisChen/Desktop/clutch_shots.csv")
+write.csv(date_normal, "/Users/ChrisChen/Desktop/cleaned.csv")
