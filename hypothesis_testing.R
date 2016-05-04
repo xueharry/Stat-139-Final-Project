@@ -29,6 +29,15 @@ loss_clutch_perc = c(rep(1,sum(clutch_shots_loss$clutch_shots_made)), rep(0,sum(
 loss_clutch_perc_ci = boot.mean(x = loss_clutch_perc, B = 1000)$interval
 ## since the two confidence intervals do not overlap, at the 95% confidence level there is significant evidence of a difference in Kobe's clutch field goal percentage in games won versus games lost. 
 ## so Kobe appears to have shot significantly better in the clutch during wins as opposed to losses.
+## to check whether Kobe's performance was significantly different in clutch versus nonclutch situations, need to separate the shots made into those two categories. 
+nonclutch_shots_made = bydate_data$shots_made-bydate_data$clutch_shots_made
+nonclutch_shots_taken = bydate_data$shots_taken-bydate_data$clutch_shots_taken
+nonclutch_perc = c(rep(1, sum(nonclutch_shots_made)), rep(0, sum(nonclutch_shots_taken)-sum(nonclutch_shots_made)))
+nonclutch_perc_ci = boot.mean(x = nonclutch_perc, B = 1000)$interval
+clutch_perc_boot = c(rep(1, sum(bydate_data$clutch_shots_made)), rep(0, sum(bydate_data$clutch_shots_taken)-sum(bydate_data$clutch_shots_made)))
+clutch_perc_boot_ci = boot.mean(x = clutch_perc_boot, B = 1000)$interval
+## since the two confidence intervals do not overlap, at the 95% confidence level there is also significant evidence of a difference in Kobe's clutch and nonclutch field goal percentages
+## based on the confidence intervals, Kobe's true field goal percentage is actually higher in nonclutch versus clutch situations.
 ## Finger injury occurred on February 5, 2008 season (season 11, overall game number 473, season ends at game 507)
 ## Compare Kobe's performance before the injury and after injury during the season. Hypothesis: Kobe is notoriously tough so he is not as affected by injuries.
 bydate_data_finger = subset(bydate_data, game_number > 472 & game_number < 508)
