@@ -36,7 +36,10 @@ fit=glm(cleaned$shot_made_flag~cleaned$period+cleaned$seconds_remaining+cleaned$
 
 # tested for stationarity
 adf.test(cleaned$avg, alternative = "stationary")
+adf.test(by_date$win, alternative = "stationary")
 
-# Probit Regressions on Wins 
-
+# logit Regressions on Wins 
+fit=glm(by_date$win~by_date$avg+by_date$shots_made+by_date$shots_taken+by_date$clutch_perc+by_date$clutch_shots_made+by_date$clutch_shots_taken+by_date$ot)
+# after removing least significant variables
+fit=glm(by_date$win~by_date$avg+by_date$clutch_shots_made)
 
