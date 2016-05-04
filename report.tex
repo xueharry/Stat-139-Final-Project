@@ -141,7 +141,7 @@
 
 	\hspace*{1cm}While preprocessing the data, we thought it would be helpful to normalize the variables for game date and the season to be integers beginning with 1 and increasing by 1 for each successive season/game because we thought it likely that Kobe's skill level changed with time and normalizing the time-dependent variables (using a \texttt{for} loop to increment a counter variable every time we found a unique instance of a time-dependent variable in the date-ordered data set) would allow us to more easily use them as predictors.
 
-	\hspace*{1cm}Additionally, we created a separate data frame specifically to track Kobe's ``clutch'' shots, that is, the shots Kobe attempted when there were less than 2 minutes remaining in the game, in order to examine whether Kobe's shooting accuracy improved or suffered towards the end of the game and whether Kobe lived up to his ``clutch'' reputation. We thought 2 minutes was a reasonable threshold for ``clutch'' shooting because the 2 minute mark is close enough to the end of the game to warrant riskier plays but far away enough for Kobe to execute those plays and actually take some shots. 
+	\hspace*{1cm}Additionally, we created a separate data frame specifically to track Kobe's ``clutch'' shots, that is, the shots Kobe attempted when there were less than 2 minutes remaining in the game, in order to examine whether Kobe's shooting accuracy improved or suffered towards the end of the game and whether Kobe lived up to his ``clutch'' reputation. We thought 2 minutes was a reasonable threshold for ``clutch'' shooting because the 2 minute mark is close enough to the end of the game to warrant riskier plays but far away enough for Kobe to execute those plays and actually take some shots. We also created a variable to track Kobe's shooting percentage for non-clutch shots to avoid multicollinearity during model building if we were to use Kobe's ``clutch'' shooting percentage as a regresssor. 
 	\subsection{Addition of Win-loss Data}
 	\hspace*{1cm}Unfortunately the Kaggle dataset did not include data on whether the game during which a particular shot took place was won by the Lakers or not. Therefore we decided to gather that data ourselves. We scraped win-loss data for all Lakers games in the time period covered by the Kaggle dataset from \texttt{landofbasketball.com} \cite{landofbasketball} using the ``Web Scraper'' Chrome extension and merged that data with the original Kaggle dataset for use in our analysis.
 	\subsection{New Variables Created}
@@ -162,14 +162,16 @@
 	\item \texttt{shots\_made}: Shots made for each game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
 	\item \texttt{shots\_taken}: Shots taken per game (may seem redundant, but useful for calculating averages over multiple games since we can't just average the averages)
 	\item \texttt{clutch\_threshold}: Number of minutes remaining at which we begin counting shots as clutch shots.
-	\item \texttt{clutch\_perc}: Average shot percentage for clutch shots (shots attempted with below \texttt{clutch\_threshold} minutes remaining) for each game.
+	\item \texttt{clutch\_perc}: Average shooting percentage for clutch shots (shots attempted with below \texttt{clutch\_threshold} minutes remaining) for each game.
 	\item \texttt{clutch\_shots\_made}: number of clutch shots made for each game.
 	\item \texttt{clutch\_shots\_taken}: number of clutch shots taken for each game. 
+	\item \texttt{non\_clutch\_perc}: Average shooting percentange for non-clutch shots (shots attempted with above \texttt{clutch\_threshold} minutes remaining) for each game. 
 	\item \texttt{ot}: dummy variable for whether or not the game went overtime.
 	\item \texttt{ot\_taken}: number of shots taken in OT.
 	\item \texttt{ot\_made}: number of shots made in OT.
 	\item \texttt{ot\_avg}: OT shooting percentage for each game.
 	\item \texttt{season\_norm}: represents the number of seasons Kobe has been in the NBA at the time of each game.
+
 	\end{itemize}
 \section{Assumptions}
 \subsection{Randomness of Data}
@@ -255,13 +257,13 @@ package. Using the AIC criterion with a backwards stepwise regression, we obtain
 \hspace*{1cm}The linear model would have failed almost every single one of our regression diagnostics so we decided that running them would be redundant. For example, the dependent variable was binary so all of our residuals would have exhibited heteroskedasticity. However, by comparing the linear model results to the logit model results, we found that the signs of the coefficients of the significant regressors agreed with the signs of the logit model coefficients, lending support to the validity of the observations derived from the logit model coefficients. 
 
 \subsubsection{Logistic Regression on Win/Loss Data}
-\hspace*{1cm}To evaluate whether or not Kobe's game performance affected the ultimate result of a given game (on average), we ran a logit regression using the \texttt{win} variable mentioned above (obtained by scraping win/loss data) against the summary statistics of Kobe's game performance (for example, the above-mentioned \texttt{avg} and \texttt{clutch\_shots\_made}) variables. Even though we had fewer observations for win/loss data than for shooting data because unique observations occurred on a game-by-game basis as opposed to a shot-by-shot basis, our win/loss data still satisfied the assumptions necessary to run a logit regresion. 
+\hspace*{1cm}To evaluate whether or not Kobe's game performance affected the ultimate result of a given game (on average), we ran a logit regression using the \texttt{win} variable mentioned above (obtained by scraping win/loss data) against the summary statistics of Kobe's game performance. To avoid multicollinearity between our regressors, we chose to only regress \texttt{win} against \texttt{clutch\_perc} and \texttt{non\_clutch\_perc} (because these two statistics were calculated using the \texttt{shots\_made}, \texttt{shots\_taken}, \texttt{clutch\_shots\_made} and \texttt{clutch\_shots\_taken} variables, including any of these variables in the model would have caused our regressors to be extremely interdependent and therefore would have resulted in multicollinearity). Even though we had fewer observations for win/loss data than for shooting data because unique observations occurred on a game-by-game basis as opposed to on a shot-by-shot basis, our win/loss data still satisfied the assumptions necessary to run a logit regresion. 
 
 \hspace*{1cm}Given the similar results obtained by running the \texttt{stepwise} command and manually performing a backwards stepwise regression for the shooting data, we thought it was reasonable to only perform the latter, which produced:
 \begin{center}
-	\includegraphics[scale=0.65]{img/logitwins}
+	\includegraphics[scale=0.6]{img/logitwins}
 \end{center}
-\hspace*{1cm}According to the results above, Kobe's average shot percentage for a given game was associated with a higher probability of a Lakers win and an increase in the number of clutch shots made by Kobe was associated with a decrease in the probability of a Lakers win. Shots made, shots taken, clutch percentage, clutch shots taken, and whether or not the game went into overtime were found to be insignificant. 
+\hspace*{1cm}According to the results above, both Kobe's average shooting percentage and clutch shooting percentage for a given game were associated with a higher probability of a Lakers win, supporting our hypothesis that Kobe's game performance significantly affected on the propbability of a win. 
 \subsubsection{Stationarity}
 \hspace*{1cm}If a given data set is stationary, then the mean, variance, and autocorrelation do not change over time. That is, a stationary series is a flat looking series, without a trend, which has constant variance over time. Stationarity was an important consideration for us to look at because we wanted to see if Kobe's shot percentage changed somehow over time. Did injuries affect how good he was? Did aging cause his shot accuracy to fall or did experience cause it to go up? We used the \texttt{adf.test} function in R to test for stationarity. The null hypothesis was that the data was not stationary and the alternative was that the data was stationary. 
 \begin{center}
