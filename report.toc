@@ -1,0 +1,25 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Research Questions}{2}{section.1}
+\contentsline {section}{\numberline {2}Motivation}{2}{section.2}
+\contentsline {section}{\numberline {3}Hypotheses}{2}{section.3}
+\contentsline {section}{\numberline {4}Methods}{2}{section.4}
+\contentsline {subsection}{\numberline {4.1}Dataset Used}{2}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Overview}{2}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Data Preprocessing}{3}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Addition of Win-loss Data}{3}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}New Variables Created}{3}{subsection.4.5}
+\contentsline {section}{\numberline {5}Assumptions}{4}{section.5}
+\contentsline {subsection}{\numberline {5.1}Randomness of Data}{4}{subsection.5.1}
+\contentsline {section}{\numberline {6}Results}{4}{section.6}
+\contentsline {subsection}{\numberline {6.1}Exploratory Analysis}{4}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Significance Testing}{6}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Model Building and Interpretations}{7}{subsection.6.3}
+\contentsline {subsubsection}{\numberline {6.3.1}Logistic Regression on Shot Made Data}{7}{subsubsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.2}Logistic Regression on Win/Loss Data}{11}{subsubsection.6.3.2}
+\contentsline {subsubsection}{\numberline {6.3.3}Stationarity}{12}{subsubsection.6.3.3}
+\contentsline {subsection}{\numberline {6.4}Cross Validation}{12}{subsection.6.4}
+\contentsline {section}{\numberline {7}Limitations}{12}{section.7}
+\contentsline {subsection}{\numberline {7.1}Lack of Free-Throw Data}{12}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Definition of Clutch}{12}{subsection.7.2}
+\contentsline {section}{\numberline {8}Challenges Faced \& Lessons Learned}{13}{section.8}
+\contentsline {section}{\numberline {9}Conclusion}{13}{section.9}
